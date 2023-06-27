@@ -15,10 +15,102 @@ canvas {
     box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);
 }
 
+.start-screen {
+    height: 480px;
+    width: 720px;
+    border-radius: 12px;
+    box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);
+}
+
+.starting-BG {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttons {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFC800;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 2px rgb(0 0 0 / 20%);
+    transition: all 200ms ease-in-out;
+}
+
+.start-game {
+    font-size: 22px;
+    border-radius: 12px;
+    top: 20px;
+    left: 39%;
+    width: 160px;
+}
+
+.sound{
+    top: 430px;
+    font-size: 22px;
+    border-radius: 12px;
+    left: 30%;
+    width: 50px;
+    height: 36px;
+    background-image: url(img/icons/volume.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 28px;
+}
+
+.fullscreen {
+    left: 10%;
+    top: 430px;
+    font-size: 22px;
+    border-radius: 12px;
+    width: 50px;
+    height: 36px;
+    background-image: url(img/icons/fullscreen.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 28px;
+}
+
+.controls {
+    right: 10%;
+    top: 430px;
+    font-size: 22px;
+    border-radius: 12px;
+    width: 50px;
+    height: 36px;
+    background-image: url(img/icons/joystick.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 28px;
+}
+
+.about {
+    right: 30%;
+    top: 430px;
+    font-size: 22px;
+    border-radius: 12px;
+    width: 50px;
+    height: 36px;
+    background-image: url(img/icons/info.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 28px;
+}
+
+.d-none {
+    display: none;
+}
+
 
 /* Smartphones -----*/
 @media only screen and (max-width: 720px) {
     canvas {
+        width: 100%;
+    }
+
+    .start-screen {
         width: 100%;
     }
 }
@@ -31,5 +123,9 @@ canvas {
 
     h1 {
         display: none;
+    }
+
+    .start-screen {
+        height: 100vh;
     }
 }
