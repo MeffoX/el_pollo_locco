@@ -71,10 +71,11 @@ class Endboss extends MovableObject {
             }
 
             i++;
-
+/*
             if(world.character.x > 2000) {
                 this.playAnimation(this.IMAGES_ALERT);
-            }
+            } 
+            */
     }, 200)
     }
 
