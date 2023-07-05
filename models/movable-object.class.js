@@ -66,6 +66,14 @@ isColliding(obj) {
 }
 
 
+isCollidingCoin(coin) {
+    return (this.x) + (this.width) > (coin.x) &&
+        (this.y) + (this.height) > (coin.y) &&
+        (this.x) < (coin.x + coin.width) &&
+        (this.y) < (coin.y) + (coin.height)
+}
+
+
 hit() {
     this.energy -= 5;
     if (this.energy < 0) {

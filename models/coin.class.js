@@ -19,7 +19,7 @@ class Coin extends MovableObject {
 
 
     placeCoins() {
-        this.x = 400 + Math.random() * 3500;
+        this.x = 400 + Math.random() * 1500;
         this.y = 40 + Math.random() * 250;
     }
 

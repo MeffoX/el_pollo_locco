@@ -5,13 +5,12 @@ let keyboard = new Keyboard();
 
 function init() {
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
-
+    initLevel(); //creates all Elements in the game, except character
+    setTimeout(() => {
+        world = new World(canvas, keyboard);
+    }, 100);
     document.getElementById('canvas').classList.remove('d-none');
     document.getElementById('startScreen').classList.add('d-none');
-
-
-    console.log('My Character is', world.character)
 }
 
 

@@ -1,5 +1,6 @@
 body {
     display: flex;
+    font-family: 'Luckiest Guy', Arial, Helvetica, sans-serif;
     justify-content: center;
     flex-direction: column;
     align-items: center;

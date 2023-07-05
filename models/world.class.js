@@ -6,7 +6,12 @@ class World {
     keyboard;
     camera_x = 0;
     statusBar = new StatusBar();
+    statusbarCoin = new StatusbarCoin();
+    statusbarBottle = new StatusbarBottle();
     throwableObjects = [];
+
+    scoreCoins = 0; //counter which counts the collected coins
+    scoreBottles = 0; //counter which counts the collected bottles
 
 
     constructor(canvas, keyboard) {
@@ -43,6 +48,24 @@ class World {
         }
 
 
+    checkCollectCoins() {
+        this.level.coins.forEach((coin) => {
+            if (this.character.isColliding(coin)) {
+                console.log('Colliding Coin');
+                this.removeCoin(coin);
+                this.scoreCoins += 1;
+                this.level.coins.splice(1);
+            }
+        })
+    }
+    
+    
+    removeCoin(coin) {
+        let index = this.level.coins.indexOf(coin);
+        this.level.coins.splice(index, 1);
+    }
+
+
     checkThrowObjects() {
         if (this.keyboard.D) {
             let bottle = new ThrowableObject(this.character.x +100, this.character.y + 100);
@@ -60,11 +83,16 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
         //----- Space for fixed objects ------
         this.addToMap(this.statusBar);
+        this.addToMap(this.statusbarCoin);
+        this.addToMap(this.statusbarBottle);
+        this.character.drawScore(this.ctx, this.scoreCoins, this.scoreBottles);
         this.ctx.translate(this.camera_x, 0);
 
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.throwableObjects);
 
         this.ctx.translate(-this.camera_x, 0);

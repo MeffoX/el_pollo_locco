@@ -36,6 +36,12 @@ class DrawableObject {
     }
 
 
+    drawScore(ctx, scoreCoins, scoreBottles) {
+        ctx.font = "34px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText(scoreCoins, 80, 103);
+        ctx.fillText(scoreBottles, 173, 103);
+    }
     
 
     drawFrame(ctx) {

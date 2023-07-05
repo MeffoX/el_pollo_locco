@@ -1,20 +1,19 @@
-class Bottle extends ThrowableObject {
-
-    IMAGES_GROUND = [
-        'img/6_salsa_bottle/1_salsa_bottle_on_ground.png',
-        'img/6_salsa_bottle/2_salsa_bottle_on_ground.png'
-    ];
+class Bottle extends MovableObject {
+    height = 70;
+    width = 70;
 
 
-
-    constructor() {
+    constructor(imagePath) {
         super();
-        this.loadImages(this.IMAGES_GROUND);
+        this.loadImage(imagePath);
         this.placeBottles();
     }
 
-
+    /**
+     * bottles will randomly placed on the map
+     */
     placeBottles() {
-        this.x = 500 + Math.random() * 1700;
-    } 
+        this.y = 355;
+        this.x = 500 + Math.random() * 1800;
+    }
 }
