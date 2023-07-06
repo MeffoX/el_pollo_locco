@@ -19,7 +19,6 @@ class ThrowableObject extends MovableObject {
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
     ]
 
-    bottleBreak = new Audio('audio/bottle-break.mp3');
 
 
     constructor(x, y) {
@@ -73,7 +72,6 @@ class ThrowableObject extends MovableObject {
 
 
     bottleBreaks(bottle, indexBottle, throwableObjects) {
-        playOrStopSound(bottle.bottleBreak);
         this.colliding = true; //animates bottle break in throwable-object.class.js file
         bottle.y = throwableObjects[indexBottle].y;
     }
@@ -91,7 +89,7 @@ class ThrowableObject extends MovableObject {
 
     animateBottleBreak() {
         this.playAnimation(this.BOTTLE_SPLASH);
-        this.speedY = 0; //when bottle collides with object, bottle should not move more on y axis
+        this.speedY = 0; //when bottle collides with object, bottle should not move more on y
         setTimeout(() => {
             this.colliding = false;
         }, 1300);

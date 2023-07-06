@@ -31,10 +31,16 @@ class World {
 
     run() {
         setInterval(() => {
-
-            this.checkCollisions();
+            this.checkAllCollisions();
             this.checkThrowObjects();
-        }, 1000);
+        }, 100);
+    }
+
+
+    checkAllCollisions() {
+        this.checkCollisions();
+        this.checkCoinCollision();
+        this.checkBottleCollision();
     }
 
 
@@ -47,22 +53,38 @@ class World {
             });
         }
 
-
-    checkCollectCoins() {
+    checkCoinCollision() {
         this.level.coins.forEach((coin) => {
             if (this.character.isColliding(coin)) {
-                console.log('Colliding Coin');
+                console.log('coin');
                 this.removeCoin(coin);
                 this.scoreCoins += 1;
-                this.level.coins.splice(1);
+                //this.level.coins.splice(1);
             }
         })
     }
-    
+
     
     removeCoin(coin) {
         let index = this.level.coins.indexOf(coin);
         this.level.coins.splice(index, 1);
+    }
+
+
+    checkBottleCollision() {
+        this.level.bottles.forEach((bottle) => {
+            if (this.character.isColliding(bottle)) {
+                console.log('bottle');
+                this.removeBottle(bottle);
+                this.scoreBottles += 1;
+            }
+        })
+    }
+
+
+    removeBottle(bottle) {
+        let index = this.level.bottles.indexOf(bottle);
+        this.level.bottles.splice(index, 1);
     }
 
 

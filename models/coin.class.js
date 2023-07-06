@@ -1,6 +1,6 @@
 class Coin extends MovableObject {
-    height = 130;
-    width = 130;
+    height = 70;
+    width = 70;
 
 
     IMAGES = [

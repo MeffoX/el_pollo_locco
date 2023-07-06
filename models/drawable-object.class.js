@@ -23,10 +23,6 @@ class DrawableObject {
     }
 
 
-    /**
-     * 
-     * @param {Array} arr - ['img/image1.png, 'img/image2.png', . . . ] 
-     */
     loadImages(arr){
         arr.forEach((path) => {
             let img = new Image();
@@ -42,10 +38,27 @@ class DrawableObject {
         ctx.fillText(scoreCoins, 80, 103);
         ctx.fillText(scoreBottles, 173, 103);
     }
+
+
+        resolveImageIndex() {
+            if (this.percentage == 100)
+                return 5;
+            else if (this.percentage > 80)
+                return 4;
+            else if (this.percentage > 60)
+                return 3;
+            else if (this.percentage > 40)
+                return 2;
+            else if (this.percentage > 20)
+                return 1;
+            else {
+                return 0;
+            }
+        }
     
 
     drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Chicken || this instanceof SmallChicken) {
+        if (this instanceof Character || this instanceof Chicken || this instanceof SmallChicken || this instanceof Bottle || this instanceof Coin || this instanceof Endboss) {
             ctx.beginPath();
             ctx.lineWidth = "4";
             ctx.strokeStyle = "red";

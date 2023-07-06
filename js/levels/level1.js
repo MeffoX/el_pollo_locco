@@ -3,14 +3,14 @@ let allBottles = [];
 let level1;
 
 
-//create 15 coins and push them in Array
+//create 10 coins and push them in Array
 for (let i = 0; i < 10; i++) {
     let coin = new Coin();
     allCoins.push(coin);
 }
 
 
-//create 12 Bottles who looks to the left and push them in Array
+//create 11 Bottles who looks to the left and push them in Array
 for (let i = 0; i < 11; i++) {
     let bottle = new Bottle('img/6_salsa_bottle/1_salsa_bottle_on_ground.png');
     allBottles.push(bottle);
@@ -18,7 +18,7 @@ for (let i = 0; i < 11; i++) {
 
 
 //create 12 Bottles who looks to the right and push them in Array
-for (let i = 12; i < 24; i++) {
+for (let i = 11; i < 22; i++) {
     let bottle = new Bottle('img/6_salsa_bottle/2_salsa_bottle_on_ground.png');
     allBottles.push(bottle);
 }
