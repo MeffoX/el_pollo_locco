@@ -43,84 +43,26 @@ class World  {
         this.checkBottleCollision();
     }
 
-/*
-    checkCollisions() {
-        this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy)) {
-                this.character.hit();
-                this.statusBar.setPercentage(this.character.energy);
-            }
-            });
-        }
-
-
-        checkCollisions() {
-    this.level.enemies.forEach((enemy) => {
-        if (this.character.isColliding(enemy)) {
-            // Überprüfen, ob der Charakter sich über dem Boden befindet
-            if (this.character.isAboveGround()) {
-                // Der Charakter befindet sich über dem Boden, also soll der Gegner Schaden nehmen
-                enemy.energy -= 100;
-                // Überprüfen, ob der Gegner tot ist
-                if (enemy.energy <= 0) {
-                    enemy.playAnimation(enemy.IMAGES_DEAD); // Spiele die Todesanimation ab
-                    // Nachdem die Todesanimation abgespielt wurde, entferne das Huhn
-                    setTimeout(() => {
-                        this.removeChicken(enemy); // Hier rufst du die removeChicken Methode mit dem enemy als Argument auf
-                    }, 1000); // 1000 Millisekunden Verzögerung entspricht 1 Sekunde
-                }
-            } else {
-                // Der Charakter befindet sich nicht über dem Boden, also soll der Charakter Schaden nehmen
-                this.character.hit();
-                this.statusBar.setPercentage(this.character.energy);
-            }
-        }
-    });
-}
-
-
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
-            
-                if (this.character.isAboveGround()) {
+    
+                if (this.character.isAboveGround() && this.character.y < enemy.y) {
                     enemy.energy -= 100;
-                    if (enemy.energy <= 0) {
-                        enemy.isDead();
-                        this.removeChicken(enemy);
+    
+                    if (enemy.isDead && enemy.isDead()) {
+                        this.handleFallingEnemy(enemy);
                     }
-                } else {
+    
+                } else if (!enemy.isDead || (enemy.isDead && !enemy.isDead())) { 
                     this.character.hit();
                     this.statusBar.setPercentage(this.character.energy);
                 }
             }
         });
     }
-*/
-
-checkCollisions() {
-    this.level.enemies.forEach((enemy) => {
-        if (this.character.isColliding(enemy)) {
-            
-            if (enemy.isDead) {
-                this.handleFallingEnemy(enemy);
-            } else {
-                if (this.character.isAboveGround()) {
-                    enemy.energy -= 100;
-                    if (enemy.energy <= 0) {
-                        enemy.isDead = true;
-                        enemy.playAnimation(enemy.IMAGES_DEAD);
-                        this.handleFallingEnemy(enemy);
-                    }
-                } else {
-                    this.character.hit();
-                    this.statusBar.setPercentage(this.character.energy);
-                }
-            }
-        }
-    });
-}
+    
 
 
 handleFallingEnemy(enemy) {
