@@ -1,4 +1,4 @@
-class World {
+class World  {
     character = new Character();
     level = level1;
     canvas;
@@ -43,23 +43,111 @@ class World {
         this.checkBottleCollision();
     }
 
-
+/*
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy) ) {
+            if (this.character.isColliding(enemy)) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
             }
             });
         }
 
+
+        checkCollisions() {
+    this.level.enemies.forEach((enemy) => {
+        if (this.character.isColliding(enemy)) {
+            // Überprüfen, ob der Charakter sich über dem Boden befindet
+            if (this.character.isAboveGround()) {
+                // Der Charakter befindet sich über dem Boden, also soll der Gegner Schaden nehmen
+                enemy.energy -= 100;
+                // Überprüfen, ob der Gegner tot ist
+                if (enemy.energy <= 0) {
+                    enemy.playAnimation(enemy.IMAGES_DEAD); // Spiele die Todesanimation ab
+                    // Nachdem die Todesanimation abgespielt wurde, entferne das Huhn
+                    setTimeout(() => {
+                        this.removeChicken(enemy); // Hier rufst du die removeChicken Methode mit dem enemy als Argument auf
+                    }, 1000); // 1000 Millisekunden Verzögerung entspricht 1 Sekunde
+                }
+            } else {
+                // Der Charakter befindet sich nicht über dem Boden, also soll der Charakter Schaden nehmen
+                this.character.hit();
+                this.statusBar.setPercentage(this.character.energy);
+            }
+        }
+    });
+}
+
+
+
+    checkCollisions() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy)) {
+            
+                if (this.character.isAboveGround()) {
+                    enemy.energy -= 100;
+                    if (enemy.energy <= 0) {
+                        enemy.isDead();
+                        this.removeChicken(enemy);
+                    }
+                } else {
+                    this.character.hit();
+                    this.statusBar.setPercentage(this.character.energy);
+                }
+            }
+        });
+    }
+*/
+
+checkCollisions() {
+    this.level.enemies.forEach((enemy) => {
+        if (this.character.isColliding(enemy)) {
+            
+            if (enemy.isDead) {
+                this.handleFallingEnemy(enemy);
+            } else {
+                if (this.character.isAboveGround()) {
+                    enemy.energy -= 100;
+                    if (enemy.energy <= 0) {
+                        enemy.isDead = true;
+                        enemy.playAnimation(enemy.IMAGES_DEAD);
+                        this.handleFallingEnemy(enemy);
+                    }
+                } else {
+                    this.character.hit();
+                    this.statusBar.setPercentage(this.character.energy);
+                }
+            }
+        }
+    });
+}
+
+
+handleFallingEnemy(enemy) {
+    if (enemy.isFalling) {
+        return;
+    }
+
+    enemy.isFalling = true;
+
+    let fallingInterval = setInterval(() => {
+        enemy.y += 10;
+
+        if (enemy.y >= 480) {
+            clearInterval(fallingInterval);
+
+            let index = this.level.enemies.indexOf(enemy);
+            this.level.enemies.splice(index, 1);
+        }
+    }, 50);
+}
+
+
     checkCoinCollision() {
         this.level.coins.forEach((coin) => {
             if (this.character.isColliding(coin)) {
-                console.log('coin');
                 this.removeCoin(coin);
                 this.scoreCoins += 1;
-                //this.level.coins.splice(1);
             }
         })
     }
@@ -74,7 +162,6 @@ class World {
     checkBottleCollision() {
         this.level.bottles.forEach((bottle) => {
             if (this.character.isColliding(bottle)) {
-                console.log('bottle');
                 this.removeBottle(bottle);
                 this.scoreBottles += 1;
             }
@@ -161,4 +248,11 @@ class World {
         this.ctx.restore();
     }
 
+    
 }
+
+
+
+
+
+
