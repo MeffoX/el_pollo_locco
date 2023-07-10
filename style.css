@@ -104,6 +104,26 @@ canvas {
     display: none;
 }
 
+.smartphone-control {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 720px;
+    bottom: 60px;
+    height: 70px;
+}
+
+
+.panel img {
+    height: 35px;
+    width: 65px;
+    margin: 10px;
+    background-color: #FFC800;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
 
 /* Smartphones -----*/
 @media only screen and (max-width: 720px) {
@@ -114,7 +134,12 @@ canvas {
     .start-screen {
         width: 100%;
     }
+
+    .smartphone-control {
+        width: 100%; 
+    }
 }
+
 
 /* Smartphones -----*/
 @media only screen and (max-height: 480px) {
@@ -127,6 +152,10 @@ canvas {
     }
 
     .start-screen {
+        height: 100vh;
+    }
+
+    .smartphone-control {
         height: 100vh;
     }
 }

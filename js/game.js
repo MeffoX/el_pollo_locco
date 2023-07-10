@@ -10,7 +10,11 @@ function init() {
         world = new World(canvas, keyboard);
     }, 100);
     document.getElementById('canvas').classList.remove('d-none');
+    document.getElementById('panel1').classList.remove('d-none');
+    document.getElementById('panel2').classList.remove('d-none');
     document.getElementById('startScreen').classList.add('d-none');
+
+    responsivePressEvents();
 }
 
 
@@ -66,3 +70,73 @@ window.addEventListener('keyup', (e) => {
         keyboard.D = false;
     }
 })
+
+
+/**
+ * function for the responsive buttons to move the character
+ */
+function responsivePressEvents() {
+    responsiveGoLeft();
+    responsiveGoRight();
+    responsiveJumpUp();
+    responsiveThrowBottle();
+}
+
+
+/**
+ * when you click on the left arrow, the background from the arrow truns yellow and
+ * character moves to left, if you move your finger from the arrow, character stops
+ */
+function responsiveGoLeft() {
+
+    document.getElementById('goLeft').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.LEFT = true;
+    });
+
+    document.getElementById('goLeft').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.LEFT = false;
+    });
+}
+
+
+function responsiveGoRight() {
+    document.getElementById('goRight').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.RIGHT = true;
+    });
+
+    document.getElementById('goRight').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.RIGHT = false;
+    });
+}
+
+
+function responsiveJumpUp() {
+    document.getElementById('goJump').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.SPACE = true;
+    });
+
+    document.getElementById('goJump').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.SPACE = false;
+    });
+}
+
+
+function responsiveThrowBottle() {
+    document.getElementById('goThrow').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.D = true;
+    });
+
+    document.getElementById('goThrow').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.D = false;
+    });
+}
+
+

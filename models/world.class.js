@@ -9,6 +9,7 @@ class World  {
     statusbarCoin = new StatusbarCoin();
     statusbarBottle = new StatusbarBottle();
     throwableObjects = [];
+    isInAir = false;
 
     scoreCoins = 0; //counter which counts the collected coins
     scoreBottles = 0; //counter which counts the collected bottles
@@ -69,12 +70,9 @@ handleFallingEnemy(enemy) {
     if (enemy.isFalling) {
         return;
     }
-
     enemy.isFalling = true;
-
     let fallingInterval = setInterval(() => {
         enemy.y += 10;
-
         if (enemy.y >= 480) {
             clearInterval(fallingInterval);
 
@@ -122,6 +120,39 @@ handleFallingEnemy(enemy) {
             let bottle = new ThrowableObject(this.character.x +100, this.character.y + 100);
             this.throwableObjects.push(bottle);
         }
+    }
+
+
+    /**
+     * if you want to throw a bottle, function generates the throwable Object
+     */
+    checkThrowObjects() {
+        if (this.wantThrowBottle()) {
+            let bottle;
+            this.isInAir = true;
+            if (this.character.otherDirection == true) {
+                bottle = new ThrowableObject(this.character.x, this.character.y + 100);
+                bottle.otherDirection = true;
+            } else
+                bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+            this.throwableObjects.push(bottle);
+            this.scoreBottles -= 1;
+            bottle.setOrStopIntervalBottle(this.throwableObjects);
+            this.throwNextBottle();
+        }
+    }
+    
+    
+
+    throwNextBottle() {
+        setTimeout(() => {
+            this.isInAir = false;
+        }, 500);
+    }
+    
+    
+    wantThrowBottle() {
+        return this.keyboard.D && this.scoreBottles > 0 && !this.isInAir
     }
 
 
