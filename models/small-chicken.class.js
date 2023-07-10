@@ -42,6 +42,5 @@ class SmallChicken extends MovableObject {
     }, 200)
     }
 
-
     
 }

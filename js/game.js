@@ -138,5 +138,3 @@ function responsiveThrowBottle() {
         keyboard.D = false;
     });
 }
-
-
