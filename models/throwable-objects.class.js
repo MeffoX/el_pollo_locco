@@ -1,6 +1,7 @@
 class ThrowableObject extends MovableObject {
     speedX = 20;
     colliding = false;
+    isAnimating;
 
     BOTTLE_IMAGES = [
         'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
@@ -70,14 +71,6 @@ class ThrowableObject extends MovableObject {
     }
 
 
-
-    bottleBreaks(bottle, indexBottle, throwableObjects) {
-        this.colliding = true; //animates bottle break in throwable-object.class.js file
-        bottle.y = throwableObjects[indexBottle].y;
-    }
-
-
-
     bottleDisappearsFromScreen() {
         this.playAnimation(this.BOTTLE_IMAGES);
         if (this.otherDirection == true)
@@ -86,12 +79,10 @@ class ThrowableObject extends MovableObject {
             this.x += 30;
     }
 
-
-    animateBottleBreak() {
-        this.playAnimation(this.BOTTLE_SPLASH);
-        this.speedY = 0; //when bottle collides with object, bottle should not move more on y
-        setTimeout(() => {
-            this.colliding = false;
-        }, 1300);
+    animateBottleSplash() {
+        this.isAnimating = true;
+        this.playAnimation(this.BOTTLE_SPLASH, () => this.isAnimating = false);
     }
+    
+
 }

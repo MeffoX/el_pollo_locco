@@ -6,6 +6,7 @@ class World  {
     keyboard;
     camera_x = 0;
     statusBar = new StatusBar();
+    statusBarEndboss = new StatusbarEndboss();
     statusbarCoin = new StatusbarCoin();
     statusbarBottle = new StatusbarBottle();
     throwableObjects = [];
@@ -38,6 +39,7 @@ class World  {
     }
 
 
+
     checkAllCollisions() {
         this.checkCollisions();
         this.checkCoinCollision();
@@ -65,14 +67,13 @@ class World  {
         });
     }
 
-    
+
     checkBottleHit() {
         this.throwableObjects.forEach((bottle) => {
             this.level.enemies.forEach((enemy) => {
                 if (enemy.isColliding(bottle)) {
                     enemy.energy -= 100;
-                    this.removeThrowableObject(bottle);
-    
+                    bottle.animateBottleSplash();
                     if (enemy.isDead()) {
                         this.handleFallingEnemy(enemy);
                     }
@@ -80,6 +81,8 @@ class World  {
             });
         });
     }
+
+    
 
     removeThrowableObject(bottle) {
         let index = this.throwableObjects.indexOf(bottle);
@@ -187,6 +190,7 @@ handleFallingEnemy(enemy) {
         this.ctx.translate(-this.camera_x, 0);
         //----- Space for fixed objects ------
         this.addToMap(this.statusBar);
+        this.addToMap(this.statusBarEndboss);
         this.addToMap(this.statusbarCoin);
         this.addToMap(this.statusbarBottle);
         this.character.drawScore(this.ctx, this.scoreCoins, this.scoreBottles);
