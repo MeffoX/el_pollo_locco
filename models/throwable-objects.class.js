@@ -34,7 +34,7 @@ class ThrowableObject extends MovableObject {
         this.throw();
     }
 
-
+/*
     throw() {
         this.checkDirectionThrowBottle();
         this.applyGravity();
@@ -45,14 +45,29 @@ class ThrowableObject extends MovableObject {
                 this.bottleDisappearsFromScreen();
         }, 80);
     }
+*/
+
+throw() {
+    this.checkDirectionThrowBottle();
+    this.applyGravity();
+    setTimeout(() => {
+        if (!this.isAnimating) { // Prüfen ob die Flasche nicht gerade animiert wird
+            if (this.colliding)
+                this.animateBottleSplash(); // Ändern Sie dies zu animateBottleSplash
+            else
+                this.bottleDisappearsFromScreen();
+                this.throw(); // Rufen Sie throw() erneut auf, wenn die Flasche noch nicht kollidiert hat
+        }
+    }, 80);
+}
 
 
 
     checkDirectionThrowBottle() {
         if (this.otherDirection == true)
-            this.speedY = -25;
+            this.speedY = 10;
         else
-            this.speedY = 25;
+            this.speedY = 10;
     }
 
 
@@ -81,8 +96,16 @@ class ThrowableObject extends MovableObject {
 
     animateBottleSplash() {
         this.isAnimating = true;
-        this.playAnimation(this.BOTTLE_SPLASH, () => this.isAnimating = false);
+        this.playAnimation(this.BOTTLE_SPLASH, () => {
+            setTimeout(() => {
+                this.isAnimating = false;
+                if (this.hasHit) {  // Fügen Sie diese Zeile hinzu
+                    world.removeThrowableObject(this);
+                }
+            }, 300);
+        });
     }
+    
     
 
 }

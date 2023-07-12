@@ -12,6 +12,7 @@ class World  {
     throwableObjects = [];
     isInAir = false;
 
+
     scoreCoins = 0; //counter which counts the collected coins
     scoreBottles = 0; //counter which counts the collected bottles
 
@@ -68,26 +69,55 @@ class World  {
     }
 
 
-    checkBottleHit() {
-        this.throwableObjects.forEach((bottle) => {
+/*
+checkBottleHit() {
+    this.throwableObjects.forEach((bottle) => {
+        this.level.enemies.forEach((enemy) => {
+            if (enemy.isColliding(bottle)) {
+                enemy.energy -= 100;
+                bottle.animateBottleSplash();
+                if (enemy instanceof Endboss) {
+                    enemy.getHurt();
+                } else {
+                    bottle.animateBottleSplash();
+                }
+                if (enemy.isDead()) {
+                    this.handleFallingEnemy(enemy);
+                }
+            }
+        });
+    });
+}
+*/
+
+checkBottleHit() {
+    this.throwableObjects.forEach((bottle) => {
+        if (!bottle.hasHit) {
             this.level.enemies.forEach((enemy) => {
                 if (enemy.isColliding(bottle)) {
+                    bottle.hasHit = true;
                     enemy.energy -= 100;
                     bottle.animateBottleSplash();
+                    if (enemy instanceof Endboss) {
+                        enemy.getHurt();
+                    } else {
+                        bottle.animateBottleSplash();
+                    }
                     if (enemy.isDead()) {
                         this.handleFallingEnemy(enemy);
                     }
                 }
             });
-        });
-    }
+        }
+    });
+}
 
     
 
-    removeThrowableObject(bottle) {
-        let index = this.throwableObjects.indexOf(bottle);
-        this.throwableObjects.splice(index, 1);
-    }
+removeThrowableObject(bottle) {
+    let index = this.throwableObjects.indexOf(bottle);
+    this.throwableObjects.splice(index, 1);
+}
 
 
 
@@ -108,14 +138,14 @@ handleFallingEnemy(enemy) {
 }
 
 
-    checkCoinCollision() {
-        this.level.coins.forEach((coin) => {
-            if (this.character.isColliding(coin)) {
-                this.removeCoin(coin);
-                this.scoreCoins += 1;
-            }
-        })
-    }
+checkCoinCollision() {
+    this.level.coins.forEach((coin) => {
+        if (this.character.isColliding(coin)) {
+            this.removeCoin(coin);
+            this.scoreCoins += 1;
+        }
+    })
+}
 
     
     removeCoin(coin) {

@@ -9,6 +9,8 @@ class Bottle extends MovableObject {
         this.placeBottles();
     }
 
+    hasHit = false;
+
     /**
      * bottles will randomly placed on the map
      */
