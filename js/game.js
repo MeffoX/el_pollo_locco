@@ -18,6 +18,21 @@ function init() {
 }
 
 
+function backToStart() {
+    location.reload();
+}
+
+
+/**
+ * at the end of the game all intervals will be cleared
+ */
+function clearAllIntervals() {
+    for (let i = 1; i < 9999; i++) {
+        window.clearInterval(i);
+    }
+}
+
+
 window.addEventListener('keydown', (e) => {
     if (e.keyCode == 39) {
         keyboard.RIGHT = true;

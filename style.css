@@ -10,6 +10,13 @@ body {
     background-position: center;
 }
 
+button {
+    z-index: 50;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+
 canvas {
     background-color: black;
     display: block;

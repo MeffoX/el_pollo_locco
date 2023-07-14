@@ -108,6 +108,10 @@ class Endboss extends MovableObject {
         }
     });
 }
+
+isDead() {
+    return this.energy <= 0 && this.y >= 420;
+}
   
 
 }

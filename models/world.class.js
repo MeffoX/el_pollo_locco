@@ -36,6 +36,7 @@ class World  {
         setInterval(() => {
             this.checkAllCollisions();
             this.checkThrowObjects();
+            this.checkGameOver();
         }, 100);
     }
 
@@ -69,48 +70,32 @@ class World  {
     }
 
 
-/*
-checkBottleHit() {
-    this.throwableObjects.forEach((bottle) => {
-        this.level.enemies.forEach((enemy) => {
-            if (enemy.isColliding(bottle)) {
-                enemy.energy -= 100;
-                bottle.animateBottleSplash();
-                if (enemy instanceof Endboss) {
-                    enemy.getHurt();
-                } else {
-                    bottle.animateBottleSplash();
-                }
-                if (enemy.isDead()) {
-                    this.handleFallingEnemy(enemy);
-                }
+    checkBottleHit() {
+        this.throwableObjects.forEach((bottle) => {
+            if (!bottle.hasHit) {
+                this.level.enemies.forEach((enemy) => {
+                    if (enemy.isColliding(bottle)) {
+                        bottle.hasHit = true;
+                        enemy.energy -= 100;
+                        let percentage = (enemy.energy / 500) * 100;  // Prozentsatz aktualisieren
+                        this.statusBarEndboss.setPercentage(percentage);
+                        bottle.animateBottleSplash();
+                        if (enemy instanceof Endboss) {
+                            enemy.getHurt();
+                        } else {
+                            bottle.animateBottleSplash();
+                        }
+                        if (enemy.energy <= 0) {
+                            this.handleFallingEnemy(enemy);
+                        }
+                    }
+                });
             }
         });
-    });
-}
-*/
-
-checkBottleHit() {
-    this.throwableObjects.forEach((bottle) => {
-        if (!bottle.hasHit) {
-            this.level.enemies.forEach((enemy) => {
-                if (enemy.isColliding(bottle)) {
-                    bottle.hasHit = true;
-                    enemy.energy -= 100;
-                    bottle.animateBottleSplash();
-                    if (enemy instanceof Endboss) {
-                        enemy.getHurt();
-                    } else {
-                        bottle.animateBottleSplash();
-                    }
-                    if (enemy.isDead()) {
-                        this.handleFallingEnemy(enemy);
-                    }
-                }
-            });
-        }
-    });
-}
+    }
+    
+    
+    
 
     
 
@@ -133,8 +118,9 @@ handleFallingEnemy(enemy) {
 
             let index = this.level.enemies.indexOf(enemy);
             this.level.enemies.splice(index, 1);
+            this.checkGameOver();
         }
-    }, 50);
+    }, 70);
 }
 
 
@@ -277,6 +263,41 @@ checkCoinCollision() {
         this.ctx.restore();
     }
 
+
+    checkGameOver() {
+        if (this.character.isDead() || this.level.enemies.some(enemy => enemy instanceof Endboss && enemy.isDead())) {
+            this.showGameOverScreen();
+            clearAllIntervals();
+        }
+    }
+    
+    /*
+    showGameOverScreen() {
+        document.getElementById('panel1').classList.add('d-none');
+        document.getElementById('panel2').classList.add('d-none');
+        document.getElementById('canvas').classList.add('d-none');
+        document.getElementById('gameOver').classList.remove('d-none');
+    }
+    */
+    showGameOverScreen() {
+        // Verstecke alle aktiven Bildschirme
+        document.getElementById('panel1').classList.add('d-none');
+        document.getElementById('panel2').classList.add('d-none');
+        document.getElementById('canvas').classList.add('d-none');
+    
+        // Zeige Game Over Bildschirm
+        let gameOverScreen = document.getElementById('gameOver');
+        gameOverScreen.classList.remove('d-none');
+    
+        // Warte 3 Sekunden und wechsle dann zum Startbildschirm
+        setTimeout(() => {
+            // Verstecke Game Over Bildschirm
+            gameOverScreen.classList.add('d-none');
+    
+            // Zeige Startbildschirm
+            document.getElementById('startScreen').classList.remove('d-none');
+        }, 3000);
+    }
     
 }
 
