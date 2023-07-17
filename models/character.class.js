@@ -74,6 +74,13 @@ class Character extends MovableObject {
     walking_sound = new Audio('audio/walking.mp3');
 
 
+    /**
+    * Constructor for a new Character instance. 
+    * The constructor calls several methods to set up the character:
+    * loadAllImages loads all necessary images for the character,
+    * applyGravity applies the effect of gravity to the character, and
+    * animate handles the character's animations.
+    */
     constructor() {
         super();
         this.loadAllImages();
@@ -82,6 +89,11 @@ class Character extends MovableObject {
     }
 
 
+/**
+ * This method loads all the necessary images for the Character instance. 
+ * It uses the loadImage method to load each image.
+ * Images are categorized into different actions like walking, jumping, dead, hurt, and sleeping.
+ */
     loadAllImages() {
         this.loadImage('img/2_character_pepe/2_walk/W-21.png');
         this.loadImages(this.IMAGES_SLEEPING);
@@ -93,48 +105,85 @@ class Character extends MovableObject {
     }
 
 
-    animate() {
+/**
+ * This methods handles the animation of the Character instance. 
+ * It uses two intervals to continually check and update the character's state and position.
+ * It checks for input from the keyboard to move the character and change its state.
+ * It also updates the position of the camera based on the character's x position.
+ */
+animate() {
+    this.setAnimateIntervals();
+}
 
-        setInterval( () => { 
-            this.walking_sound.pause();
-            if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-                this.moveRight();
-            }
 
-            if(this.world.keyboard.LEFT && this.x > 0) {
-                this.otherDirection = true;
-                this.moveLeft();
-                this.walking_sound.play();
-            }
+setAnimateIntervals() {
+    this.setFirstInterval();
+    this.setSecondInterval();
+}
 
-            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-                this.jump();
-            }
 
-            this.world.camera_x = -this.x +100;
-        }, 1000 / 60);
+setFirstInterval() {
+    setInterval(() => this.firstIntervalActions(), 1000 / 60);
+}
 
-        setInterval( () => {
 
-            if(this.isDead()){
-                this.playAnimation(this.IMAGES_DEAD);
-            } else if(this.isHurt()){
-                this.playAnimation(this.IMAGES_HURT);
-            }
-            else if(this.isAboveGround()){
-                this.playAnimation(this.IMAGES_JUMPING);
-            } else {
+firstIntervalActions() {
+    this.walking_sound.pause();
+    this.handleMovement();
+    this.handleJump();
+    this.world.camera_x = -this.x + 100;
+}
 
-                if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                this.playAnimation(this.IMAGES_WALKING);
-                } else {
-                    this.playAnimation(this.IMAGES_SLEEPING);
-                }
-            }
-        }, 240)
+
+handleMovement() {
+    if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+        this.moveRight();
     }
+    if (this.world.keyboard.LEFT && this.x > 0) {
+        this.otherDirection = true;
+        this.moveLeft();
+        this.walking_sound.play();
+    }
+}
 
 
+handleJump() {
+    if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+        this.jump();
+    }
+}
 
 
+setSecondInterval() {
+    setInterval(() => this.secondIntervalActions(), 240);
+}
+
+
+secondIntervalActions() {
+    if (this.isDead()) {
+        this.playAnimation(this.IMAGES_DEAD);
+    } else if (this.isHurt()) {
+        this.playAnimation(this.IMAGES_HURT);
+    } else {
+        this.handleJumpingOrWalkingAnimation();
+    }
+}
+
+
+handleJumpingOrWalkingAnimation() {
+    if (this.isAboveGround()) {
+        this.playAnimation(this.IMAGES_JUMPING);
+    } else {
+        this.handleWalkingOrSleepingAnimation();
+    }
+}
+
+
+handleWalkingOrSleepingAnimation() {
+    if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+        this.playAnimation(this.IMAGES_WALKING);
+    } else {
+        this.playAnimation(this.IMAGES_SLEEPING);
+    }
+}
 } 

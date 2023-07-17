@@ -12,6 +12,11 @@ class StatusBar extends DrawableObject {
     percentage = 100;
 
 
+/**
+ * Constructs an instance of the class, extends DrawableObject, loads images,
+ * sets initial x and y coordinates, sets initial height and width, and
+ * sets the initial percentage to 100.
+ */
     constructor() {
         super();
         this.loadImages(this.IMAGES);
@@ -22,7 +27,12 @@ class StatusBar extends DrawableObject {
         this.setPercentage(100);
     }
 
-    //setPercentage(50);
+
+/**
+ * Sets the percentage property of the object, resolves the image index,
+ * and sets the image property of the object based on the resolved index.
+ * @param {number} percentage - The percentage to be set (between 0 and 5 inclusive).
+ */
     setPercentage(percentage) {
         this.percentage = percentage; // => 0 ... 5
         let path = this.IMAGES[this.resolveImageIndex()];

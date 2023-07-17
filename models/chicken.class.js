@@ -14,7 +14,14 @@ class Chicken extends MovableObject {
 
 
 
-
+/**
+ * Constructor for a new Chicken instance. 
+ * The constructor calls several methods to set up the chicken:
+ * loadImage loads an initial image for the chicken,
+ * loadImages loads all necessary images for the chicken's states,
+ * placeChicken places the chicken on the game screen at a random position,
+ * and animate handles the chicken's movement and animation.
+ */
     constructor() {
         super().loadImage('img/3_enemies_chicken/chicken_normal/1_walk/1_w.png')
         this.loadImages(this.IMAGES_WALKING);
@@ -26,13 +33,19 @@ class Chicken extends MovableObject {
 
     }
 
-
+    /**
+     * This method positions a chicken object on the game screen.
+     * It sets a random x-position for the chicken.
+     */
     placeChicken() {
         this.x = 500 + Math.random() * 1700;
     }
 
-
-
+    
+    /**
+     * This method handles the movement and animation of the Chicken instance. 
+     * It uses two intervals to continually check and update the chicken's state and position.
+     */
     animate() {
         setInterval(() => {
             this.moveLeft();

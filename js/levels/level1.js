@@ -24,7 +24,11 @@ for (let i = 11; i < 22; i++) {
 }
 
 
-//all Objects from the Game except Character
+/**
+ * This function initializes the first level of the game. 
+ * It creates a new Level instance, with arrays of different game entities 
+ * (such as characters, clouds, background objects, coins, and bottles) as arguments.
+ */
 function initLevel() {
     level1 = new Level(
         [

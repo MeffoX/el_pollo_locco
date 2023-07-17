@@ -15,6 +15,12 @@ class SmallChicken extends MovableObject {
     ];
 
 
+/**
+ * SmallChicken class extends MovableObject. Represents smaller chicken enemies in the game.
+ * @property {number} speed - The speed at which the small chicken moves. Random value between 0.15 and 0.45.
+ * @constructor
+ * Loads the images for walking and dead states, places the chicken in the level and starts animation.
+ */
 
     constructor() {
         super().loadImage('img/3_enemies_chicken/chicken_small/1_walk/1_w.png')
@@ -27,11 +33,21 @@ class SmallChicken extends MovableObject {
     }
 
 
+    /**
+     * placeChicken method sets the initial x-coordinate of the small chicken in the game world.
+     * The chicken is placed randomly between 500 and 2000 pixels from the left edge of the game world.
+     */
     placeChicken() {
         this.x = 500 + Math.random() * 1500;
     }
 
 
+    /**
+     * animate method is responsible for the animation of the small chicken within the game world.
+     * The chicken continuously moves to the left based on a set interval of roughly 60 times per second.
+     * It also checks whether the chicken is dead or not. If the chicken is dead, it will play a death animation. 
+     * If the chicken is not dead, it will play a walking animation. The animation is updated roughly 5 times per second.
+     */
     animate() {
         setInterval(() => {
             this.moveLeft();

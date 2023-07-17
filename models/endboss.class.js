@@ -51,6 +51,11 @@ class Endboss extends MovableObject {
  hadFirstContact = false;
  isHurt = false;
 
+
+/**
+ * Constructor for the Endboss class.
+ * Endboss class inherits from the MovableObject class.
+ */
     constructor(){
         super().loadImage(this.IMAGES_ALERT[0]);
         this.loadImages(this.IMAGES_ALERT);
@@ -63,40 +68,71 @@ class Endboss extends MovableObject {
         this.animate();
     }
 
-    animate() {
-      let i = 0;
-      let moveInterval;
-  
-      setInterval(() => {
-          if (i < 8) {
-              this.playAnimation(this.IMAGES_ALERT);
-          } else {
-              this.playAnimation(this.IMAGES_WALKING);
-          }
-  
-          i++;
-  
-          if(world.character.x > 1950 && !this.hadFirstContact) {
-             i = 0;
-             this.hadFirstContact = true;
-          }
-  
-          if(this.hadFirstContact && !moveInterval) {
-              moveInterval = setInterval(() => {
-                  this.moveLeft();
-              }, 1000 / 60);
-          }
 
-          if (this.isHurt && this.energy > 0) {
+/**
+ * This methods handles the animation of the Endboss instance. 
+ */
+    animate() {
+        this.setAnimateInterval();
+    }
+    
+
+    setAnimateInterval() {
+        let i = 0;
+        let moveInterval;
+    
+        setInterval(() => {
+            i = this.handleAnimation(i);
+            moveInterval = this.maybeMove(moveInterval);
+            this.handleHurtOrDead();
+        }, 200);
+    }
+    
+
+    handleAnimation(i) {
+        if (i < 8) {
+            this.playAnimation(this.IMAGES_ALERT);
+        } else {
+            this.playAnimation(this.IMAGES_WALKING);
+        }
+        if (world.character.x > 1950 && !this.hadFirstContact) {
+            i = 0;
+            this.hadFirstContact = true;
+        }
+        return ++i;
+    }
+    
+
+    maybeMove(moveInterval) {
+        if (this.hadFirstContact && !moveInterval) {
+            moveInterval = setInterval(() => this.moveLeft(), 1000 / 60);
+        }
+        return moveInterval;
+    }
+    
+
+    handleHurtOrDead() {
+        if (this.isHurt && this.energy > 0) {
             this.playAnimation(this.IMAGES_HURT);
         } else if (this.energy <= 0) {
             this.playAnimation(this.IMAGES_DEAD);
         }
+    }
 
-          
-      }, 200);
-  }
 
+  /**
+   * The getHurt() function is a method that controls the behavior of the character when it gets hurt. 
+   * This function is typically invoked when a character like Endboss interacts with an object or 
+   * another character that reduces its health or energy.
+   * 
+   * Functionality:
+   * 1. Sets the character's state to 'hurt' by setting 'this.isHurt' to true.
+   * 2. Starts the 'hurt' animation using the 'IMAGES_HURT' array of image paths.
+   * 3. After the 'hurt' animation, the callback function checks the character's energy level:
+   *     - If the energy level is above 0, it implies the character is still 'alive'. The character's
+   *       state is set back to 'not hurt', and the 'walking' animation starts again.
+   *     - If the energy level is not above 0, it implies the character is 'dead'. The 'dead' animation starts.
+   */
   getHurt() {
     this.isHurt = true;
     this.playAnimation(this.IMAGES_HURT, () => {
@@ -109,9 +145,19 @@ class Endboss extends MovableObject {
     });
 }
 
-isDead() {
-    return this.energy <= 0 && this.y >= 420;
-}
+
+  /**
+   * The isDead() function is a method that checks whether the Endboss is dead.
+   * A character is considered dead if the following two conditions are met:
+   * 1. The character's energy level (this.energy) is less than or equal to zero.
+   * 2. The character's vertical position (this.y) is greater than or equal to 420.
+   * 
+   * @returns {boolean} - returns true if the character is dead according to the mentioned conditions, 
+   *                      false otherwise.
+   */
+    isDead() {
+        return this.energy <= 0 && this.y >= 420;
+    }
   
 
 }

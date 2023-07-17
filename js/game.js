@@ -3,6 +3,11 @@ let world;
 let keyboard = new Keyboard();
 
 
+/**
+ * This function initializes the game by setting up the canvas, 
+ * initializing the level, creating the game world, and configuring the UI elements.
+ * It also sets up the press events for responsiveness.
+ */
 function init() {
     canvas = document.getElementById('canvas');
     initLevel(); //creates all Elements in the game, except character
@@ -18,13 +23,19 @@ function init() {
 }
 
 
+/**
+ * This function reloads the page, effectively bringing the user back to the start state of the application.
+ */
 function backToStart() {
     location.reload();
 }
 
 
+
+
+
 /**
- * at the end of the game all intervals will be cleared
+ * This function clears all active intervals in the window.
  */
 function clearAllIntervals() {
     for (let i = 1; i < 9999; i++) {
@@ -33,6 +44,8 @@ function clearAllIntervals() {
 }
 
 
+// Adding an event listener to the window object that listens for the 'keydown' event.
+// This event is fired when a key is pressed down.
 window.addEventListener('keydown', (e) => {
     if (e.keyCode == 39) {
         keyboard.RIGHT = true;
@@ -60,6 +73,8 @@ window.addEventListener('keydown', (e) => {
 })
 
 
+// Adding an event listener to the window object that listens for the 'keyup' event.
+// This event is fired when a key is released.
 window.addEventListener('keyup', (e) => {
     if (e.keyCode == 39) {
         keyboard.RIGHT = false;
@@ -88,7 +103,9 @@ window.addEventListener('keyup', (e) => {
 
 
 /**
- * function for the responsive buttons to move the character
+ * This function sets up press events for a responsive design. 
+ * It calls various functions that handle different types of user input 
+ * (going left, going right, jumping up, and throwing a bottle).
  */
 function responsivePressEvents() {
     responsiveGoLeft();
@@ -98,10 +115,6 @@ function responsivePressEvents() {
 }
 
 
-/**
- * when you click on the left arrow, the background from the arrow truns yellow and
- * character moves to left, if you move your finger from the arrow, character stops
- */
 function responsiveGoLeft() {
 
     document.getElementById('goLeft').addEventListener('touchstart', (e) => {
