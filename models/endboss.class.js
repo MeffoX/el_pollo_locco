@@ -6,6 +6,13 @@ class Endboss extends MovableObject {
     speed = 0.40;
     energy = 500;
 
+    offset = {
+        top: 0,
+        left: 50,
+        right: 0,
+        bottom: 0
+    }
+
  IMAGES_ALERT = [
     'img/4_enemie_boss_chicken/2_alert/G5.png',
     'img/4_enemie_boss_chicken/2_alert/G6.png',
@@ -51,6 +58,10 @@ class Endboss extends MovableObject {
  hadFirstContact = false;
  isHurt = false;
 
+ chicken_sound = new Audio('audio/chicken.mp3');
+ dead_sound = new Audio('audio/gameover.mp3');
+
+
 
 /**
  * Constructor for the Endboss class.
@@ -77,6 +88,9 @@ class Endboss extends MovableObject {
     }
     
 
+/**
+ * This methods handles the animation of the Endboss instance. 
+ */
     setAnimateInterval() {
         let i = 0;
         let moveInterval;
@@ -89,6 +103,10 @@ class Endboss extends MovableObject {
     }
     
 
+/**
+ * This method decides which animation to play based on the character's x position. 
+ * If the character's x position is greater than 1950 and hasn't made the first contact yet, it resets i and sets hadFirstContact to true.
+ */
     handleAnimation(i) {
         if (i < 8) {
             this.playAnimation(this.IMAGES_ALERT);
@@ -103,6 +121,9 @@ class Endboss extends MovableObject {
     }
     
 
+/**
+ * This method starts moving the object to the left if it had the first contact and moveInterval is not set yet.
+ */
     maybeMove(moveInterval) {
         if (this.hadFirstContact && !moveInterval) {
             moveInterval = setInterval(() => this.moveLeft(), 1000 / 60);
@@ -111,10 +132,20 @@ class Endboss extends MovableObject {
     }
     
 
+/**
+ * The handleHurtOrDead() method handles the situation when the character is hurt or dead. 
+ * If the character is hurt, it plays the hurt sound and changes the animation to hurt animation. 
+ * If the character is dead, it plays the dead sound and changes the animation to dead animation.
+ */
     handleHurtOrDead() {
         if (this.isHurt && this.energy > 0) {
+            this.chicken_sound.play();
             this.playAnimation(this.IMAGES_HURT);
         } else if (this.energy <= 0) {
+            if (!this.hasSoundPlayed) {
+                this.dead_sound.play();
+                this.hasSoundPlayed = true;
+            }
             this.playAnimation(this.IMAGES_DEAD);
         }
     }

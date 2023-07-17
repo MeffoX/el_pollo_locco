@@ -12,6 +12,10 @@ class World  {
     throwableObjects = [];
     isInAir = false;
 
+    collect_bottle_sound = new Audio('audio/bottle.mp3');
+    collect_coin_sound = new Audio('audio/coin.mp3');
+    bottle_splash_sound = new Audio('audio/bottlesplash.mp3');
+
 
     scoreCoins = 0; //counter which counts the collected coins
     scoreBottles = 0; //counter which counts the collected bottles
@@ -128,6 +132,7 @@ checkBottleHit() {
 checkBottleEnemyCollision(bottle) {
     this.level.enemies.forEach((enemy) => {
         if (enemy.isColliding(bottle)) {
+            this.bottle_splash_sound.play();
             this.handleBottleEnemyCollision(bottle, enemy);
         }
     });
@@ -232,6 +237,7 @@ handleFallingEnemy(enemy) {
 checkCoinCollision() {
     this.level.coins.forEach((coin) => {
         if (this.character.isColliding(coin)) {
+            this.collect_coin_sound.play();
             this.removeCoin(coin);
             this.scoreCoins += 1;
         }
@@ -262,6 +268,7 @@ removeCoin(coin) {
 checkBottleCollision() {
     this.level.bottles.forEach((bottle) => {
         if (this.character.isColliding(bottle)) {
+            this.collect_bottle_sound.play();
             this.removeBottle(bottle);
             this.scoreBottles += 1;
         }
@@ -446,7 +453,7 @@ addToMap(mo) {
         this.flipImage(mo);
     }
     mo.draw(this.ctx);
-    mo.drawFrame(this.ctx);
+    //mo.drawFrame(this.ctx);
     
     if (mo.otherDirection) {
         this.flipImageBack(mo);

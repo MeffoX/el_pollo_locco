@@ -72,6 +72,8 @@ class Character extends MovableObject {
 
     world;
     walking_sound = new Audio('audio/walking.mp3');
+    jumping_sound = new Audio('audio/jump.mp3');
+    hurt_sound = new Audio('audio/hurt.mp3');
 
 
     /**
@@ -149,6 +151,7 @@ handleMovement() {
 
 handleJump() {
     if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+        this.jumping_sound.play();
         this.jump();
     }
 }
@@ -163,6 +166,7 @@ secondIntervalActions() {
     if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD);
     } else if (this.isHurt()) {
+        this.hurt_sound.play();
         this.playAnimation(this.IMAGES_HURT);
     } else {
         this.handleJumpingOrWalkingAnimation();

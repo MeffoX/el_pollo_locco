@@ -12,6 +12,7 @@ class Chicken extends MovableObject {
         'img/3_enemies_chicken/chicken_normal/2_dead/dead.png'
     ]
 
+    jump_on_sound = new Audio('audio/jumpon.mp3');
 
 
 /**
@@ -53,12 +54,16 @@ class Chicken extends MovableObject {
 
         setInterval(() => {
             if(this.isDead()){
+                if (!this.hasSoundPlayed) {
+                    this.jump_on_sound.play();
+                    this.hasSoundPlayed = true;
+                }
                 this.playAnimation(this.IMAGES_DEAD);
             } else {
                 this.playAnimation(this.IMAGES_WALKING);
             }
         }, 200)
     }
-
-
 }
+
+

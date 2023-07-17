@@ -78,12 +78,13 @@ class DrawableObject {
         }
     
 
+
 /**
  * This method draws a red border around the instance of the given classes.
  * The border represents the bounding box of the object for visual debugging purposes.
- * It helps to understand object collisions and interactions.
+ * It helps to understand object collisions and interactions. Kepp it for Testing.
  * @param {CanvasRenderingContext2D} ctx - The rendering context of the canvas on which to draw the frame.
- */
+
     drawFrame(ctx) {
         if (this instanceof Character || this instanceof Chicken || this instanceof SmallChicken || this instanceof Bottle || this instanceof Coin || this instanceof Endboss) {
             ctx.beginPath();
@@ -93,5 +94,5 @@ class DrawableObject {
             ctx.stroke();            
         }
     }
-
+*/
 }

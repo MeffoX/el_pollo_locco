@@ -20,7 +20,7 @@ class ThrowableObject extends MovableObject {
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
     ]
 
-
+    bottle_splash_sound = new Audio('audio/bottlesplash.mp3');
 
 
     /**
@@ -125,7 +125,7 @@ throw() {
         this.playAnimation(this.BOTTLE_SPLASH, () => {
             setTimeout(() => {
                 this.isAnimating = false;
-                if (this.hasHit) {  // Fügen Sie diese Zeile hinzu
+                if (this.hasHit) {
                     world.removeThrowableObject(this);
                 }
             }, 300);
