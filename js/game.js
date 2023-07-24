@@ -113,53 +113,44 @@ function responsivePressEvents() {
 
 
 function responsiveGoLeft() {
-
     document.getElementById('goLeft').addEventListener('touchstart', (e) => {
-        e.preventDefault();
         keyboard.LEFT = true;
-    });
+    }, {passive: true});
 
     document.getElementById('goLeft').addEventListener('touchend', (e) => {
-        e.preventDefault();
         keyboard.LEFT = false;
-    });
+    }, {passive: true});
 }
 
 
 function responsiveGoRight() {
     document.getElementById('goRight').addEventListener('touchstart', (e) => {
-        e.preventDefault();
         keyboard.RIGHT = true;
-    });
+    }, {passive: true});
 
     document.getElementById('goRight').addEventListener('touchend', (e) => {
-        e.preventDefault();
         keyboard.RIGHT = false;
-    });
+    }, {passive: true});
 }
 
 
 function responsiveJumpUp() {
     document.getElementById('goJump').addEventListener('touchstart', (e) => {
-        e.preventDefault();
         keyboard.SPACE = true;
-    });
+    }, {passive: true});
 
     document.getElementById('goJump').addEventListener('touchend', (e) => {
-        e.preventDefault();
         keyboard.SPACE = false;
-    });
+    }, {passive: true});
 }
 
 
 function responsiveThrowBottle() {
     document.getElementById('goThrow').addEventListener('touchstart', (e) => {
-        e.preventDefault();
         keyboard.D = true;
-    });
+    }, {passive: true});
 
     document.getElementById('goThrow').addEventListener('touchend', (e) => {
-        e.preventDefault();
         keyboard.D = false;
-    });
+    }, {passive: true});
 }
