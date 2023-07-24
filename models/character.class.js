@@ -108,7 +108,7 @@ class Character extends MovableObject {
 
 
 /**
- * This methods handles the animation of the Character instance. 
+ * This methods handles the animations of the Character instance. 
  * It uses two intervals to continually check and update the character's state and position.
  * It checks for input from the keyboard to move the character and change its state.
  * It also updates the position of the camera based on the character's x position.

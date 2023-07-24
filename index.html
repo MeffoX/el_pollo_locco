@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google" content="notranslate">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google" content="notranslate" />
+    <link rel="stylesheet" href="style.css" />
     <title>ElPolloLoco</title>
-    <link rel="icon" type="image/x-icon" href="img/sombrero-32.png">
-    <link rel="stylesheet" href="fonts.css">
+    <link rel="icon" type="image/x-icon" href="img/sombrero-32.png" />
+    <link rel="stylesheet" href="fonts.css" />
+    <script src="js/script.js"></script>
     <script src="models/drawable-object.class.js"></script>
     <script src="models/movable-object.class.js"></script>
     <script src="models/character.class.js"></script>
@@ -28,41 +29,70 @@
     <script src="models/coin.class.js"></script>
     <script src="js/levels/level1.js"></script>
     <script src="js/game.js"></script>
+  </head>
+  <body>
 
-</head>
-<body>
-    
-<h1>El Pollo Loco</h1>
+    <h1>El Pollo Loco</h1>
 
-<div class="start-screen d-none" id="gameOver">
-<img src="img/9_intro_outro_screens/game_over/game over.png">
-<button onclick="backToStart()">Play again</button>
-</div>
+      <div class="end-screen d-none" id="gameOver">
+        <div id="outro" class="outro">
+          <img class="gameOver-image" src="img/9_intro_outro_screens/game_over/game over.png">
+          <button onclick="backToStart()">Play again</button>
+        </div>
+      </div>
 
-<div class="starting-BG"  id="startScreen">
-    <img class="start-screen" src="img/9_intro_outro_screens/start/startscreen_1.png">
-    <div class="start-game buttons" onclick="init()">START GAME</div>
-    <div class="fullscreen buttons" id="fullscreen" onclick="showFullScreen()"></div>
-    <div class="sound buttons"></div>
-    <div class="about buttons"></div>
-    <div class="controls buttons"></div>
-</div>
 
-<canvas class="d-none" id="canvas" width="720" height="480">
-</canvas>
+      <div class="starting-BG" id="startScreen">
+        <div id="fullStartscreen" class="start-screen">
+          
+          <div id="gameInfo" class="game-info">
+            <img onclick="closeAboutGame()" src="img/close.svg">
+            <span>Pepe has lost his salsa bottles.
+            Help him collect his bottles.
+            But watch out, the chickens have tasted the salsa and gone crazy.
+            Jump on them, dodge them or throw the collected bottles at them.
+          <br>
+          <br>
+            Good luck</span>
+          </div>
 
-<div id="hud" class="smartphone-control starting-BG">
-    <div class="panel d-none" id="panel1">
-        <img id="goLeft" src="img/icons/arrow-left-solid.svg">
-        <img id="goRight" src="img/icons/arrow-right-solid.svg">
+          <div id="controlling" class="controlling">
+            <img class="close-controlling" onclick="closeControlling()" src="img/close.svg">
+            <div class="caps"> <img src="img/icons/left.png"> Go Left</div>
+            <div class="caps"><img src="img/icons/right.png">Go Right</div>
+            <div class="caps"><img src="img/icons/space.png">Jump</div>
+            <div class="caps"><img src="img/icons/d.png">Throw Bottle</div>
+          </div>
 
+          <img class="starting-image"src="img/9_intro_outro_screens/start/startscreen_1.png">
+          <div id="startButton" class="start-game buttons" onclick="init()">START GAME</div>
+            <div id="bottomButtons" class="bottom-buttons"> 
+              <div class="fullscreen buttons" id="fullscreenButton" onclick="fullscreen()"></div>
+              <div class="sound buttons" id="soundButton" onclick="toggleAudio()"></div>
+              <div class="about buttons" onclick="aboutGame()"></div>
+              <div class="controls buttons" onclick="openControlling()"></div>
+            </div>
+        </div>
+      </div>
+
+
+      <div id="canvasContainer" class="canvas-container">
+
+        <canvas class="d-none" id="canvas" width="720" height="480"></canvas>
+        
+        <div id="hud" class="smartphone-control">
+          <div class="panel d-none" id="panel1">
+            <img id="goLeft" src="img/icons/arrow-left-solid.svg">
+            <img id="goRight" src="img/icons/arrow-right-solid.svg">
+          </div>
+          <div class="panel d-none" id="panel2">
+            <img id="goJump" src="img/icons/arrow-up-solid.svg">
+            <img id="goThrow" src="img/icons/wine-bottle-solid.svg">
+          </div>
+        </div>
     </div>
-    <div class="panel d-none" id="panel2">
-        <img id="goJump" src="img/icons/arrow-up-solid.svg">
-        <img id="goThrow" src="img/icons/wine-bottle-solid.svg">
-    </div>
-</div>
 
 
-</body>
+
+  </body>
 </html>

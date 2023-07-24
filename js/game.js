@@ -31,9 +31,6 @@ function backToStart() {
 }
 
 
-
-
-
 /**
  * This function clears all active intervals in the window.
  */

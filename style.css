@@ -5,16 +5,21 @@ body {
     flex-direction: column;
     align-items: center;
     margin: 0;
-    min-height: 100vh;
     background-image: url('img/BGimage.png');
     background-position: center;
 }
 
 button {
-    z-index: 50;
+    background-color: #FFC800;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 2px rgb(0 0 0 / 20%);
+    transition: all 200ms ease-in-out;
+    font-family: 'Luckiest Guy', Arial, Helvetica, sans-serif;
+    font-size: 22px;
+    border-radius: 12px;
+    width: 160px;
     position: absolute;
-    top: 30px;
-    left: 30px;
+    margin-top: 20px;
 }
 
 canvas {
@@ -23,11 +28,29 @@ canvas {
     box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);
 }
 
+
 .start-screen {
     height: 480px;
     width: 720px;
     border-radius: 12px;
     box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);
+}
+
+.overlay {
+    height: 480px;
+    width: 720px;
+    border-radius: 12px;
+    box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);
+}
+
+.outro {
+    height: 480px;
+    width: 720px;
+    border-radius: 12px;
+    box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .starting-BG {
@@ -36,7 +59,27 @@ canvas {
     justify-content: space-between;
 }
 
+.starting-image {
+    height: 100%;
+    width: 100%;
+    border-radius: 12px;
+}
+
+.gameOver-image {
+    height: 100%;
+    width: 100%;
+    border-radius: 12px;   
+}
+
+.bottom-buttons {
+    height: 40px;
+    width: 100%;
+    position: relative;
+    bottom: 60px;
+}
+
 .buttons {
+    z-index: 99;
     position: absolute;
     display: flex;
     align-items: center;
@@ -56,7 +99,6 @@ canvas {
 }
 
 .sound{
-    top: 430px;
     font-size: 22px;
     border-radius: 12px;
     left: 30%;
@@ -70,7 +112,6 @@ canvas {
 
 .fullscreen {
     left: 10%;
-    top: 430px;
     font-size: 22px;
     border-radius: 12px;
     width: 50px;
@@ -83,7 +124,6 @@ canvas {
 
 .controls {
     right: 10%;
-    top: 430px;
     font-size: 22px;
     border-radius: 12px;
     width: 50px;
@@ -96,7 +136,6 @@ canvas {
 
 .about {
     right: 30%;
-    top: 430px;
     font-size: 22px;
     border-radius: 12px;
     width: 50px;
@@ -111,15 +150,21 @@ canvas {
     display: none;
 }
 
-.smartphone-control {
+.canvas-container {
     position: relative;
+}
+
+.smartphone-control {
+    position: absolute;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 720px;
-    bottom: 60px;
-    height: 70px;
+    background: none;
+    width: 100%;
+    bottom: 0;
+    top: auto;
 }
+
 
 
 .panel img {
@@ -131,42 +176,77 @@ canvas {
     cursor: pointer;
 }
 
+.game-info {
+    flex-direction: column;
+    justify-content: space-around;
+    position: absolute;
+    text-align: center;
+    align-items: center;
+    height: 100%;
+    background-color: rgb(47 45 40 / 50%);
+    display: none;
+    font-size: 26px;
+}
 
-/* Smartphones -----*/
+.game-info img {
+    height: 50px;
+    cursor: pointer;
+}
+
+.controlling {
+    position: absolute;
+    height: 100%;
+    display: none;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-color: rgb(47 45 40 / 50%);
+    width: 100%;
+}
+
+.close-controlling {
+    height: 50px;
+    cursor: pointer;
+}
+
+.caps {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    font-size: 30px;
+    justify-content: center;
+}
+
+
 @media only screen and (max-width: 720px) {
-    canvas {
+    .canvas-container, canvas, .start-screen, .outro, .starting-BG, .smartphone-control {
         width: 100%;
-    }
-
-    .start-screen {
-        width: 100%;
-    }
-
-    .smartphone-control {
-        width: 100%; 
     }
 }
 
 
-/* Smartphones -----*/
-@media only screen and (max-height: 480px) {
-    canvas {
-        height: 100vh;
-    }
 
+/* Smartphones -----*/
+@media only screen and (max-height: 562px) {
     h1 {
         display: none;
     }
+}
 
-    .start-screen {
+@media only screen and (max-height: 480px) {
+    canvas, .start-screen, .outro, .starting-BG {
         height: 100vh;
     }
 
     .smartphone-control {
-        height: 100vh;
-        z-index: 20;
-    position: absolute;
-    top: 170px;
-    width: 625px;
+        gap: 140px;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media only screen and (max-height: 300px) {
+    
+    .smartphone-control {
+        gap: 70px;
     }
 }
