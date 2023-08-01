@@ -1,7 +1,10 @@
 let isMuted = false;
+let audioElements = [];
 
-let audioElements = Array.from(document.getElementsByTagName('audio'));
 
+/**
+ * Switch with onclick on the soundButton the image und mutes the Game.
+ */
 function toggleAudio() {
   let audioIcon = document.getElementById('soundButton');
   if (!isMuted) {
@@ -57,55 +60,4 @@ function closeControlling() {
   document.getElementById('controlling').style.display = 'none';
   document.getElementById('startButton').classList.remove('d-none');
   document.getElementById('bottomButtons').classList.remove('d-none');
-}
-
-
-/**
-* Function to enter fullscreen mode and modify the canvas, start screen, and outro screen dimensions to fill the entire viewport.
-*/
-function fullscreen() {
-  let fullscreen = document.getElementById('startScreen');
-  enterFullscreen(fullscreen);
-  showFullScreenCanvasAndGameOver();
-}
-
-
-/**
-* Function to modify the canvas, start screen, and outro screen dimensions to fill the entire viewport and hide the h1 element.
-*/
-function showFullScreenCanvasAndGameOver() {
-  document.getElementById('canvas').style.width = '100vw';
-  document.getElementById('canvas').style.height = '100vh';
-  document.getElementById('fullStartscreen').style.width = '100vw';
-  document.getElementById('fullStartscreen').style.height = '100vh';
-  document.getElementById('outro').style.width = '100vw';
-  document.getElementById('outro').style.height = '100vh';
-  document.querySelector('h1').style.display = 'none';
-}
-
-
-/**
-* Function to enter fullscreen mode for a specific HTML element.
-* @param {HTMLElement} element - The HTML element to be displayed in fullscreen mode.
-*/
-function enterFullscreen(element) {
-  if(element.requestFullscreen) {
-      element.requestFullscreen();
-  } else if(element.msRequestFullscreen) {      // for IE11 (remove June 15, 2022)
-      element.msRequestFullscreen();
-  } else if(element.webkitRequestFullscreen) {  // iOS Safari
-      element.webkitRequestFullscreen();
-  }
-}
-
-
-/**
-* Function to exit fullscreen mode.
-*/
-function exitFullscreen() {
-  if(document.exitFullscreen) {
-      document.exitFullscreen();
-  } else if(document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
-  }
 }

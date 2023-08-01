@@ -13,13 +13,26 @@ function init() {
     initLevel(); //creates all Elements in the game, except character
     setTimeout(() => {
         world = new World(canvas, keyboard);
+        applyMuteState();
+        responsivePressEvents();
     }, 100);
     document.getElementById('canvas').classList.remove('d-none');
     document.getElementById('panel1').classList.remove('d-none');
     document.getElementById('panel2').classList.remove('d-none');
     document.getElementById('startScreen').classList.add('d-none');
+    placeButtons();
 
-    responsivePressEvents();
+}
+
+
+/**
+ * It place the Buttons during the running Game.
+ */
+function placeButtons() {
+    document.getElementById('bottomButtons').style.position = 'absolute';
+    document.getElementById('bottomButtons').style.top = '15px';
+    document.getElementById('aboutGame').classList.add('d-none');
+    document.getElementById('controlButton').classList.add('d-none');
 }
 
 
@@ -39,6 +52,16 @@ function clearAllIntervals() {
         window.clearInterval(i);
     }
 }
+
+
+/**
+ * Apply the current mute state to all audio elements.
+ */
+function applyMuteState() {
+    audioElements.forEach(audio => {
+      audio.muted = isMuted;
+    });
+  }
 
 
 // Adding an event listener to the window object that listens for the 'keydown' event.

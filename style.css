@@ -30,6 +30,8 @@ canvas {
 
 
 .start-screen {
+    display: flex;
+    justify-content: center;
     height: 480px;
     width: 720px;
     border-radius: 12px;
@@ -72,8 +74,12 @@ canvas {
 }
 
 .bottom-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
     height: 40px;
-    width: 100%;
+    width: 720px;
+    max-width: 100%;
     position: relative;
     bottom: 60px;
 }
@@ -94,14 +100,12 @@ canvas {
     font-size: 22px;
     border-radius: 12px;
     top: 20px;
-    left: 39%;
     width: 160px;
 }
 
 .sound{
     font-size: 22px;
     border-radius: 12px;
-    left: 30%;
     width: 50px;
     height: 36px;
     background-image: url(img/icons/volume.png);
@@ -111,7 +115,7 @@ canvas {
 }
 
 .fullscreen {
-    left: 10%;
+    right: 33%;
     font-size: 22px;
     border-radius: 12px;
     width: 50px;
@@ -135,7 +139,7 @@ canvas {
 }
 
 .about {
-    right: 30%;
+    left: 10%;
     font-size: 22px;
     border-radius: 12px;
     width: 50px;
@@ -218,7 +222,7 @@ canvas {
 
 
 @media only screen and (max-width: 720px) {
-    .canvas-container, canvas, .start-screen, .outro, .starting-BG, .smartphone-control {
+    .canvas-container, canvas, .start-screen, .outro, .starting-BG, .smartphone-control .bottom-buttons {
         width: 100%;
     }
 }
@@ -238,15 +242,18 @@ canvas {
     }
 
     .smartphone-control {
-        gap: 140px;
-        display: flex;
-        justify-content: center;
+        gap: 60px;
     }
 }
 
 @media only screen and (max-height: 300px) {
-    
     .smartphone-control {
-        gap: 70px;
+        gap: 10px;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .smartphone-control {
+        gap: 20px;
     }
 }

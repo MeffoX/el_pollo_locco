@@ -11,11 +11,13 @@ class World  {
     statusbarBottle = new StatusbarBottle();
     throwableObjects = [];
     isInAir = false;
+    audioElements = [];
 
+    /*
     collect_bottle_sound = new Audio('audio/bottle.mp3');
     collect_coin_sound = new Audio('audio/coin.mp3');
     bottle_splash_sound = new Audio('audio/bottlesplash.mp3');
-
+*/
 
     scoreCoins = 0; //counter which counts the collected coins
     scoreBottles = 0; //counter which counts the collected bottles
@@ -34,6 +36,22 @@ class World  {
         this.draw();
         this.setWorld();
         this.run();
+        this.addSounds();
+    }
+
+
+/**
+ * Add the audios and push it to the audioElements Array.
+ */
+    addSounds() {
+        this.collect_bottle_sound = new Audio('audio/bottle.mp3');
+        audioElements.push(this.collect_bottle_sound);
+
+        this.collect_coin_sound = new Audio('audio/coin.mp3');
+        audioElements.push(this.collect_coin_sound);
+
+        this.bottle_splash_sound = new Audio('audio/bottlesplash.mp3');
+        audioElements.push(this.bottle_splash_sound);
     }
 
 
@@ -507,7 +525,7 @@ checkGameOver() {
 
 /**
  * Displays the Game Over screen.
- * This method show the Game Over screen when the game ends.
+ * This method show the Game Over screen and exit Fullscreen when the game ends.
  * It first hides the panels and canvas by adding the 'd-none' class.
  * It then selects the Game Over screen by its ID, and removes the 'd-none' class, effectively making it visible.
  */
@@ -515,6 +533,7 @@ showGameOverScreen() {
     document.getElementById('panel1').classList.add('d-none');
     document.getElementById('panel2').classList.add('d-none');
     document.getElementById('canvas').classList.add('d-none');
+    document.getElementById('bottomButtons').classList.add('d-none');
     
     let gameOverScreen = document.getElementById('gameOver');
     gameOverScreen.classList.remove('d-none');

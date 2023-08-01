@@ -66,12 +66,7 @@
 
           <img class="starting-image"src="img/9_intro_outro_screens/start/startscreen_1.png">
           <div id="startButton" class="start-game buttons" onclick="init()">START GAME</div>
-            <div id="bottomButtons" class="bottom-buttons"> 
-              <div class="fullscreen buttons" id="fullscreenButton" onclick="fullscreen()"></div>
-              <div class="sound buttons" id="soundButton" onclick="toggleAudio()"></div>
-              <div class="about buttons" onclick="aboutGame()"></div>
-              <div class="controls buttons" onclick="openControlling()"></div>
-            </div>
+
         </div>
       </div>
 
@@ -79,6 +74,12 @@
       <div id="canvasContainer" class="canvas-container">
 
         <canvas class="d-none" id="canvas" width="720" height="480"></canvas>
+
+        <div id="bottomButtons" class="bottom-buttons"> 
+          <div class="about buttons" id="aboutGame" onclick="aboutGame()"></div>
+          <div class="sound buttons" id="soundButton" onclick="toggleAudio()"></div>
+          <div class="controls buttons" id="controlButton" onclick="openControlling()"></div>
+        </div> 
         
         <div id="hud" class="smartphone-control">
           <div class="panel d-none" id="panel1">

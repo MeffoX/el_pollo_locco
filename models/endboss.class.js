@@ -57,10 +57,10 @@ class Endboss extends MovableObject {
 
  hadFirstContact = false;
  isHurt = false;
-
+/*
  chicken_sound = new Audio('audio/chicken.mp3');
  dead_sound = new Audio('audio/gameover.mp3');
-
+*/
 
 
 /**
@@ -74,9 +74,21 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_DEAD);
-
         this.x = 2400;
         this.animate();
+        this.addSounds();
+    }
+
+
+/**
+ * Add the audios and push it to the audioElements Array.
+ */
+    addSounds() {
+        this.chicken_sound = new Audio('audio/chicken.mp3');
+        audioElements.push(this.chicken_sound);
+
+        this.dead_sound = new Audio('audio/gameover.mp3');
+        audioElements.push(this.dead_sound);
     }
 
 

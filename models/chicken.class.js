@@ -12,7 +12,7 @@ class Chicken extends MovableObject {
         'img/3_enemies_chicken/chicken_normal/2_dead/dead.png'
     ]
 
-    jump_on_sound = new Audio('audio/jumpon.mp3');
+    //jump_on_sound = new Audio('audio/jumpon.mp3');
 
 
 /**
@@ -29,8 +29,9 @@ class Chicken extends MovableObject {
         this.loadImages(this.IMAGES_DEAD);
         this.placeChicken();
         this.speed = 0.15 + Math.random() * 0.3;
-
         this.animate();
+        this.jump_on_sound = new Audio('audio/jumpon.mp3');
+        audioElements.push(this.jump_on_sound);
 
     }
 

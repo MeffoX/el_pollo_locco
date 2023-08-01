@@ -71,10 +71,11 @@ class Character extends MovableObject {
     }
 
     world;
+    /*
     walking_sound = new Audio('audio/walking.mp3');
     jumping_sound = new Audio('audio/jump.mp3');
     hurt_sound = new Audio('audio/hurt.mp3');
-
+*/
 
     /**
     * Constructor for a new Character instance. 
@@ -88,6 +89,21 @@ class Character extends MovableObject {
         this.loadAllImages();
         this.applyGravity();
         this.animate();
+        this.addSounds();
+    }
+
+
+/**
+ * Add the audios and push it to the audioElements Array.
+ */
+    addSounds() {
+        this.walking_sound = new Audio('audio/walking.mp3');
+        this.jumping_sound = new Audio('audio/jump.mp3');
+        this.hurt_sound = new Audio('audio/hurt.mp3');
+        
+        audioElements.push(this.walking_sound);
+        audioElements.push(this.jumping_sound);
+        audioElements.push(this.hurt_sound);
     }
 
 
