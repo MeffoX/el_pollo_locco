@@ -7,6 +7,7 @@ let keyboard = new Keyboard();
  * This function initializes the game by setting up the canvas, 
  * initializing the level, creating the game world, and configuring the UI elements.
  * It also sets up the press events for responsiveness.
+ * 
  */
 function init() {
     canvas = document.getElementById('canvas');
@@ -17,11 +18,40 @@ function init() {
         responsivePressEvents();
     }, 100);
     document.getElementById('canvas').classList.remove('d-none');
-    document.getElementById('panel1').classList.remove('d-none');
-    document.getElementById('panel2').classList.remove('d-none');
     document.getElementById('startScreen').classList.add('d-none');
     placeButtons();
+    showSmartControl();
+}
 
+
+function checkSize() {
+    var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+    var warningDiv = document.getElementById('warning');
+
+    if (width >= 370 && height >= 220) {
+      warningDiv.style.display = 'none';
+      document.getElementById('startButton').style.pointerEvents = 'auto';
+    } else {
+      warningDiv.style.display = 'block';
+      document.getElementById('startButton').style.pointerEvents = 'none';
+    }
+  }
+
+  // Check size on page load and resize
+  window.addEventListener('resize', checkSize);
+  window.addEventListener('load', checkSize);
+
+
+/**
+ * checks if the screen size is below 800.
+ * if this is the case, the panels are displayed
+ */
+function showSmartControl() {
+    if (window.innerWidth < 800) {
+        document.getElementById('panel1').classList.remove('d-none');
+        document.getElementById('panel2').classList.remove('d-none');
+    }
 }
 
 
