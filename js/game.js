@@ -14,7 +14,6 @@ function init() {
     initLevel(); //creates all Elements in the game, except character
     setTimeout(() => {
         world = new World(canvas, keyboard);
-        detectPhonePosition();
         world.initBackgroundMusic();
         applyMuteState();
         responsivePressEvents();
@@ -26,6 +25,12 @@ function init() {
 }
 
 
+/**
+ * Checks the size of the window and toggles visibility of the warning message and the ability to click the start button.
+ * If the size of the window is less than 370x220, it displays a warning message and disables the start button.
+ * If the size of the window is greater or equal to 370x220, it hides the warning message and enables the start button.
+ * It also binds itself to window 'resize' and 'load' events, so it's executed when the window is resized or the page is loaded.
+ */
 function checkSize() {
     var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
     var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
@@ -45,13 +50,19 @@ function checkSize() {
   window.addEventListener('load', checkSize);
 
 
+/**
+ * Detects the orientation of the device and toggles the visibility of an element with the id 'mobileRotation'.
+ * If the orientation is portrait, the element is displayed. 
+ * If the orientation is landscape, the element is hidden.
+ * It also binds itself to window 'resize' event, so it's executed when the window is resized.
+ */
   function detectPhonePosition() {
 
     if (window.matchMedia("(orientation: portrait)").matches) {
         // Portrait mode
         this.document.getElementById('mobileRotation').style.display = 'flex';
-
     }
+
     window.addEventListener("resize", function () {
         if (window.matchMedia("(orientation: landscape)").matches) {
             // Landscape mode

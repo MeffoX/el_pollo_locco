@@ -20,6 +20,8 @@ button {
     width: 160px;
     position: absolute;
     margin-top: 20px;
+    height: 36px;
+    border: none;
 }
 
 canvas {
@@ -100,6 +102,7 @@ canvas {
     font-size: 22px;
     border-radius: 12px;
     top: 20px;
+    height: 36px;
     width: 160px;
 }
 
@@ -216,6 +219,8 @@ canvas {
 
 .mobile-rotation {
     position: fixed;
+    top: 0px;
+    bottom: 0px;
     z-index: 50;
     align-items: center;
     justify-content: center;

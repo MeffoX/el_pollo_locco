@@ -24,38 +24,80 @@ function toggleAudio() {
 
 
 /**
- * Function to show the game information and hide the start button and bottom buttons.
+ * Makes an HTML element visible by changing its display style to 'flex'.
+ * @param {string} elementId - The ID of the HTML element to make visible.
+ */
+function showElement(elementId) {
+  document.getElementById(elementId).style.display = 'flex';
+}
+
+
+/**
+ * Hides an HTML element by changing its display style to 'none'.
+ * @param {string} elementId - The ID of the HTML element to hide.
+ */
+function hideElement(elementId) {
+  document.getElementById(elementId).style.display = 'none';
+}
+
+
+/**
+ * Hides the start button by adding 'd-none' class to it.
+ */
+function hideStartButton() {
+  document.getElementById('startButton').classList.add('d-none');
+}
+
+
+/**
+ * Makes the start button visible by removing 'd-none' class from it.
+ */
+function showStartButton() {
+  document.getElementById('startButton').classList.remove('d-none');
+}
+
+
+/**
+ * Makes the bottom buttons visible by removing 'd-none' class from them.
+ */
+function showBottomButtons() {
+  document.getElementById('bottomButtons').classList.remove('d-none');
+}
+
+
+/**
+ * Shows the game information and hides the start button.
  */
 function aboutGame() {
-  document.getElementById('gameInfo').style.display = 'flex';
-  document.getElementById('startButton').classList.add('d-none');
+  showElement('gameInfo');
+  hideStartButton();
 }
 
 
 /**
-* Function to hide the game information and show the start button and bottom buttons.
-*/
+ * Hides the game information and makes the start button and bottom buttons visible.
+ */
 function closeAboutGame() {
-  document.getElementById('gameInfo').style.display = 'none';
-  document.getElementById('startButton').classList.remove('d-none');
-  document.getElementById('bottomButtons').classList.remove('d-none');
+  hideElement('gameInfo');
+  showStartButton();
+  showBottomButtons();
 }
 
 
 /**
-* Function to show the game controlling guide and hide the start button and bottom buttons.
-*/
+ * Shows the game controlling guide and hides the start button.
+ */
 function openControlling() {
-  document.getElementById('controlling').style.display = 'flex';
-  document.getElementById('startButton').classList.add('d-none');
+  showElement('controlling');
+  hideStartButton();
 }
 
 
 /**
-* Function to hide the game controlling guide and show the start button and bottom buttons.
-*/
+ * Hides the game controlling guide and makes the start button and bottom buttons visible.
+ */
 function closeControlling() {
-  document.getElementById('controlling').style.display = 'none';
-  document.getElementById('startButton').classList.remove('d-none');
-  document.getElementById('bottomButtons').classList.remove('d-none');
+  hideElement('controlling');
+  showStartButton();
+  showBottomButtons();
 }

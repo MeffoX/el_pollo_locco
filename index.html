@@ -30,9 +30,15 @@
     <script src="js/levels/level1.js"></script>
     <script src="js/game.js"></script>
   </head>
-  <body>
+  <body onload="detectPhonePosition()">
 
     <h1>El Pollo Loco</h1>
+
+    <div class="mobile-rotation" id="mobileRotation">
+      <span>Please Rotate</span>
+      <img class="rotate-image" src="img/icons/rotate.png" alt="Please rotate your Device">
+      <span>your Device</span>
+    </div>
 
     <div id="warning" style="display: none;">
       Please resize the window. The minimum size is 370px width and 220px height.
@@ -78,11 +84,6 @@
 
       <div id="canvasContainer" class="canvas-container">
 
-        <div class="mobile-rotation" id="mobileRotation">
-          <span>Please Rotate</span>
-          <img class="rotate-image" src="img/icons/rotate.png" alt="Please rotate your Device">
-          <span>your Device</span>
-        </div>
 
         <canvas class="d-none" id="canvas" width="720" height="480"></canvas>
 
