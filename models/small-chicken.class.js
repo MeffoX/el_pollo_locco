@@ -34,6 +34,7 @@ class SmallChicken extends MovableObject {
         this.animate();
         this.jump_on_sound = new Audio('audio/jumpon.mp3');
         audioElements.push(this.jump_on_sound);
+        this.jump_on_sound.volume = 0.2;
     }
 
 

@@ -104,6 +104,10 @@ class Character extends MovableObject {
         audioElements.push(this.walking_sound);
         audioElements.push(this.jumping_sound);
         audioElements.push(this.hurt_sound);
+
+        this.walking_sound.volume = 0.3;
+        this.jumping_sound.volume = 0.3;
+        this.hurt_sound.volume = 0.3;
     }
 
 

@@ -13,11 +13,6 @@ class World  {
     isInAir = false;
     audioElements = [];
 
-    /*
-    collect_bottle_sound = new Audio('audio/bottle.mp3');
-    collect_coin_sound = new Audio('audio/coin.mp3');
-    bottle_splash_sound = new Audio('audio/bottlesplash.mp3');
-*/
 
     scoreCoins = 0; //counter which counts the collected coins
     scoreBottles = 0; //counter which counts the collected bottles
@@ -37,6 +32,7 @@ class World  {
         this.setWorld();
         this.run();
         this.addSounds();
+        this.initBackgroundMusic();
     }
 
 
@@ -44,14 +40,37 @@ class World  {
  * Add the audios and push it to the audioElements Array.
  */
     addSounds() {
+
         this.collect_bottle_sound = new Audio('audio/bottle.mp3');
         audioElements.push(this.collect_bottle_sound);
+        this.collect_bottle_sound.volume = 0.3;
 
         this.collect_coin_sound = new Audio('audio/coin.mp3');
         audioElements.push(this.collect_coin_sound);
+        this.collect_coin_sound.volume = 0.3;
 
         this.bottle_splash_sound = new Audio('audio/bottlesplash.mp3');
         audioElements.push(this.bottle_splash_sound);
+        this.bottle_splash_sound.volume = 0.3;
+    }
+
+
+/**
+ * Initializes and starts playing the background music for the game world.
+ * @method
+ * Creates a new Audio element with the path 'audio/MexicanBG.mp3',
+ * adds it to the list of audio elements, sets the volume to 0.1,
+ * enables the music to loop continuously, and starts playing.
+ * 
+ * @memberof World
+ * @instance
+ */
+    initBackgroundMusic() {
+        this.mexicanBG_sound = new Audio('audio/MexicanBG.mp3');
+        audioElements.push(this.mexicanBG_sound);
+        this.mexicanBG_sound.volume = 0.1;
+        this.mexicanBG_sound.loop = true; // Um die Musik endlos abzuspielen
+        this.mexicanBG_sound.play();
     }
 
 
@@ -537,12 +556,5 @@ showGameOverScreen() {
     
     let gameOverScreen = document.getElementById('gameOver');
     gameOverScreen.classList.remove('d-none');
+    }
 }
-    
-}
-
-
-
-
-
-

@@ -86,9 +86,11 @@ class Endboss extends MovableObject {
     addSounds() {
         this.chicken_sound = new Audio('audio/chicken.mp3');
         audioElements.push(this.chicken_sound);
+        this.chicken_sound.volume = 0.3;
 
         this.dead_sound = new Audio('audio/gameover.mp3');
         audioElements.push(this.dead_sound);
+        this.dead_sound.volume = 0.3;
     }
 
 
@@ -178,6 +180,7 @@ class Endboss extends MovableObject {
    */
   getHurt() {
     this.isHurt = true;
+    this.speed += 0.8;
     this.playAnimation(this.IMAGES_HURT, () => {
         this.isHurt = false;
         if (this.energy > 0) {

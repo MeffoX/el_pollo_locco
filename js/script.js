@@ -29,7 +29,6 @@ function toggleAudio() {
 function aboutGame() {
   document.getElementById('gameInfo').style.display = 'flex';
   document.getElementById('startButton').classList.add('d-none');
-  document.getElementById('bottomButtons').classList.add('d-none');
 }
 
 
@@ -49,7 +48,6 @@ function closeAboutGame() {
 function openControlling() {
   document.getElementById('controlling').style.display = 'flex';
   document.getElementById('startButton').classList.add('d-none');
-  document.getElementById('bottomButtons').classList.add('d-none');
 }
 
 

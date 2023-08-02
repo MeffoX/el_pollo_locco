@@ -14,6 +14,8 @@ function init() {
     initLevel(); //creates all Elements in the game, except character
     setTimeout(() => {
         world = new World(canvas, keyboard);
+        detectPhonePosition();
+        world.initBackgroundMusic();
         applyMuteState();
         responsivePressEvents();
     }, 100);
@@ -41,6 +43,26 @@ function checkSize() {
   // Check size on page load and resize
   window.addEventListener('resize', checkSize);
   window.addEventListener('load', checkSize);
+
+
+  function detectPhonePosition() {
+
+    if (window.matchMedia("(orientation: portrait)").matches) {
+        // Portrait mode
+        this.document.getElementById('mobileRotation').style.display = 'flex';
+
+    }
+    window.addEventListener("resize", function () {
+        if (window.matchMedia("(orientation: landscape)").matches) {
+            // Landscape mode
+            this.document.getElementById('mobileRotation').style.display = 'none';
+        } else {
+            // Portrait mode
+            this.document.getElementById('mobileRotation').style.display = 'flex';
+
+        }
+    });
+}
 
 
 /**
@@ -94,8 +116,10 @@ function applyMuteState() {
   }
 
 
-// Adding an event listener to the window object that listens for the 'keydown' event.
-// This event is fired when a key is pressed down.
+/**
+ *  Adding an event listener to the window object that listens for the 'keydown' event.
+ *  This event is fired when a key is pressed down.
+ */
 window.addEventListener('keydown', (e) => {
     if (e.keyCode == 39) {
         keyboard.RIGHT = true;
@@ -122,9 +146,10 @@ window.addEventListener('keydown', (e) => {
     }
 })
 
-
-// Adding an event listener to the window object that listens for the 'keyup' event.
-// This event is fired when a key is released.
+/**
+ *Adding an event listener to the window object that listens for the 'keyup' event.
+ *This event is fired when a key is released.
+ */
 window.addEventListener('keyup', (e) => {
     if (e.keyCode == 39) {
         keyboard.RIGHT = false;
@@ -166,44 +191,76 @@ function responsivePressEvents() {
 
 
 function responsiveGoLeft() {
-    document.getElementById('goLeft').addEventListener('touchstart', (e) => {
-        keyboard.LEFT = true;
-    }, {passive: true});
+    const goLeftElement = document.getElementById('goLeft');
 
-    document.getElementById('goLeft').addEventListener('touchend', (e) => {
+    goLeftElement.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.LEFT = true;
+    }, {passive: false});
+
+    goLeftElement.addEventListener('touchend', (e) => {
+        e.preventDefault();
         keyboard.LEFT = false;
-    }, {passive: true});
+    }, {passive: false});
+
+    goLeftElement.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+    });
 }
 
 
 function responsiveGoRight() {
-    document.getElementById('goRight').addEventListener('touchstart', (e) => {
-        keyboard.RIGHT = true;
-    }, {passive: true});
+    const goRightElement = document.getElementById('goRight');
 
-    document.getElementById('goRight').addEventListener('touchend', (e) => {
+    goRightElement.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.RIGHT = true;
+    }, {passive: false});
+
+    goRightElement.addEventListener('touchend', (e) => {
+        e.preventDefault();
         keyboard.RIGHT = false;
-    }, {passive: true});
+    }, {passive: false});
+
+    goRightElement.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+    });
 }
 
 
 function responsiveJumpUp() {
-    document.getElementById('goJump').addEventListener('touchstart', (e) => {
-        keyboard.SPACE = true;
-    }, {passive: true});
+    const goJumpElement = document.getElementById('goJump');
 
-    document.getElementById('goJump').addEventListener('touchend', (e) => {
+    goJumpElement.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.SPACE = true;
+    }, {passive: false});
+
+    goJumpElement.addEventListener('touchend', (e) => {
+        e.preventDefault();
         keyboard.SPACE = false;
-    }, {passive: true});
+    }, {passive: false});
+
+    goJumpElement.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+    });
 }
 
 
 function responsiveThrowBottle() {
-    document.getElementById('goThrow').addEventListener('touchstart', (e) => {
-        keyboard.D = true;
-    }, {passive: true});
+    const goThrowElement = document.getElementById('goThrow');
 
-    document.getElementById('goThrow').addEventListener('touchend', (e) => {
+    goThrowElement.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.D = true;
+    }, {passive: false});
+
+    goThrowElement.addEventListener('touchend', (e) => {
+        e.preventDefault();
         keyboard.D = false;
-    }, {passive: true});
+    }, {passive: false});
+
+    goThrowElement.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+    });
 }
