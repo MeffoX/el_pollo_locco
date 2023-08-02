@@ -180,7 +180,7 @@ class Endboss extends MovableObject {
    */
   getHurt() {
     this.isHurt = true;
-    this.speed += 0.8;
+    this.speed += 0.6;
     this.playAnimation(this.IMAGES_HURT, () => {
         this.isHurt = false;
         if (this.energy > 0) {

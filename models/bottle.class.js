@@ -2,6 +2,13 @@ class Bottle extends MovableObject {
     height = 80;
     width = 80;
 
+    offset = {
+        top: 30,
+        left: 35,
+        right: -35,
+        bottom: 0
+    }
+
 
 /**
  * Constructor for a Bottle is a subclass of MovableObject. 

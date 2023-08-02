@@ -114,32 +114,33 @@ class World  {
 
 
 /**
- * Checks for collisions between the character and each enemy in the game. For each enemy, 
- * it checks if the character is colliding with the enemy.
- * If a collision is detected and the character is above the enemy (character's `y` value is 
- * less than the enemy's `y` value), it decreases the enemy's energy by `100` and checks 
- * if the enemy is dead. If the enemy is dead, it handles the enemy's fall.
- * If the character is not above the enemy or the enemy is not dead, the character is 
- * considered hit and the character's energy is updated in the status bar.
+ * Checks for collisions between the character and enemies.
+ * This function loops over all enemies in the level and checks if the character is colliding with them.
+ * If the character is colliding with an enemy, and the character is above the ground and their y-position is lower than the enemy's,
+ * then the enemy's energy is reduced by 100. 
+ * If the enemy's energy falls to 0 or below, the handleFallingEnemy function is called on this enemy.
+ * If the character is colliding with an enemy whose energy is greater than 0, and the character is not above the enemy,
+ * then the character is hit, and the display of the character's energy is updated.
  */
-    checkCollisions() {
-        this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy)) {
-    
-                if (this.character.isAboveGround() && this.character.y < enemy.y) {
-                    enemy.energy -= 100;
-    
-                    if (enemy.isDead && enemy.isDead()) {
-                        this.handleFallingEnemy(enemy);
-                    }
-    
-                } else if (!enemy.isDead || (enemy.isDead && !enemy.isDead())) { 
-                    this.character.hit();
-                    this.statusBar.setPercentage(this.character.energy);
+checkCollisions() {
+    this.level.enemies.forEach((enemy) => {
+        if (this.character.isColliding(enemy)) {
+
+            if (this.character.isAboveGround() && this.character.y < enemy.y) {
+                enemy.energy -= 100;
+
+                if (enemy.energy <= 0) {
+                    this.handleFallingEnemy(enemy);
                 }
+
+            } else if (enemy.energy > 0) { 
+                this.character.hit();
+                this.statusBar.setPercentage(this.character.energy);
             }
-        });
-    }
+        }
+    });
+}
+
 
 
 
